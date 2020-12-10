@@ -1,12 +1,12 @@
 # Integração com PHPMAILER v6.0.7
 
-### Depedências
+### Depedências:
 * PHP >= 7.2
 * PHPMAILER 6.0.7
 
 
 
-### Installation:
+### Instalação:
 
 No arquivo composer.json, adicione a seguinte dependency no seu projeto:
 
@@ -29,6 +29,27 @@ define("MAIL", [
     "from_name" => "Your name",
     "from_email" => "Your email"
 ]);
+```
+
+
+
+### Estancie e mande o email
+
+```php
+$email = new Email();
+$email->add(
+    "Esse é meu primeiro email", 
+    "<h1>Email Teste!</h1>Usando PHPMAILER", 
+    "Nome do destinatário", 
+    "destinatario@email.com"
+)->send();
+
+if (!$email->error()) {
+    var_dump(true);
+} else {
+    echo $email->error()->getMessage();
+}
+```
 
 
 
