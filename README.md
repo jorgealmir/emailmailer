@@ -44,7 +44,7 @@ $email->add(
     "destinatario@email.com"
 )->send();
 
-if (!$email->error()) {
+if ($email->error()) {
     var_dump(true);
 } else {
     echo $email->error()->getMessage();
