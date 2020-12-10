@@ -17,6 +17,11 @@ class Email
     /** @var Exception */
     private $error;
     
+    
+    
+    /**
+     * Construtor
+     */
     public function __construct() 
     {
         $this->mail = new PHPMailer(true);
@@ -36,6 +41,16 @@ class Email
         $this->mail->Password = MAIL['passwd'];
     }
     
+    
+    
+    /**
+     * Adiciona um email
+     * @param string $subject
+     * @param string $body
+     * @param string $recipient_name
+     * @param string $recipient_email
+     * @return \Jamartins\Emailmailer\Email
+     */
     public function add(
         string $subject, 
         string $body, 
@@ -49,12 +64,28 @@ class Email
         return $this;
     }
     
+    
+    
+    /**
+     * Adiciona um anexo
+     * @param string $filePath
+     * @param string $fileName
+     * @return \Jamartins\Emailmailer\Email
+     */
     public function attach(string $filePath, string $fileName): Email
     {
         $this->data->attach[$filePath] = $fileName;
         return $this;
     }
     
+    
+    
+    /**
+     * Manda o email que foi adicionado
+     * @param string $from_name
+     * @param string $from_email
+     * @return bool
+     */
     public function send(
         string $from_name = MAIL['from_name'], 
         string $from_email = MAIL['from_email']
@@ -79,6 +110,12 @@ class Email
         }
     }
     
+    
+    
+    /**
+     * Retorna os erros ao mandar o email
+     * @return Exception|null
+     */
     public function error(): ?Exception 
     {
         return $this->error;
